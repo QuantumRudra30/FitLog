@@ -8,8 +8,6 @@ const nextConfig: NextConfig = {
         hostname: "img.magnific.com",
         pathname: "/**",
       },
-      // add more patterns here as needed, e.g.:
-      // { protocol: "https", hostname: "images.unsplash.com" },
     ],
   },
 };

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { TbBarbell } from "react-icons/tb";
+import Image from "next/image";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -7,7 +8,7 @@ const Footer = () => {
       <div className="container mx-auto flex flex-col items-center justify-between gap-3 px-6 py-5 sm:flex-row">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <TbBarbell size={20} className="text-lime-400" />
+          <Image src={logo} alt="FitLog Logo" width={20} height={20} />
           <span className="text-sm font-extrabold uppercase tracking-wide text-base-content">
             FitLog
           </span>

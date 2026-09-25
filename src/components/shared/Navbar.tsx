@@ -1,14 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 import logo from "@/assets/logo.png";
+import { usePlan } from "@/context/PlanContext";
 
 const Navbar = () => {
-  // Temporary data
-  // Later these will come from your actual Today's Plan and Saved state.
-  const todaysPlan = [];
-  const saved = [];
+  const { planItems, savedItems } = usePlan();
 
   return (
     <nav className="bg-[#0c0d0f] text-white border-b border-[#1d1f22]">
@@ -122,7 +121,7 @@ const Navbar = () => {
               </span>
 
               <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-[#ccff00] px-1.5 text-[10px] font-bold text-black">
-                {todaysPlan.length}
+                {planItems.length}
               </span>
             </Link>
 
@@ -136,7 +135,7 @@ const Navbar = () => {
               </span>
 
               <span className="flex h-5 min-w-5 items-center justify-center rounded-full border border-[#3a3c40] px-1.5 text-[10px] text-[#b8b9bb]">
-                {saved.length}
+                {savedItems.length}
               </span>
             </Link>
 
