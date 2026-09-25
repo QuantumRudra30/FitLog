@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "react-toastify";
 import { FiClock, FiStar, FiCheckCircle, FiX } from "react-icons/fi";
 import { MdLocalFireDepartment } from "react-icons/md";
 import { usePlan } from "@/context/PlanContext";
@@ -169,7 +170,10 @@ export default function MyPlanPage() {
                 </Link>
 
                 <button
-                  onClick={() => toggleDone(workout.id)}
+                  onClick={() => {
+                    toggleDone(workout.id);
+                    if (!done) toast.success(`"${workout.name}" marked as done 💪`);
+                  }}
                   className={`btn btn-xs border-none ${
                     done ? "bg-base-300 text-base-content" : "bg-lime-400 text-black hover:bg-lime-500"
                   }`}
@@ -179,7 +183,10 @@ export default function MyPlanPage() {
                 </button>
 
                 <button
-                  onClick={() => removeFromPlan(workout.id)}
+                  onClick={() => {
+                    removeFromPlan(workout.id);
+                    toast.info(`Removed "${workout.name}" from today's plan`);
+                  }}
                   className="text-base-content/40 hover:text-base-content"
                   aria-label="Remove"
                 >
@@ -205,6 +212,18 @@ export default function MyPlanPage() {
                 </div>
               </div>
 
+              <div className="flex flex-wrap items-center gap-3 text-xs text-base-content/60 sm:gap-4">
+                <span className="flex items-center gap-1">
+                  <FiClock size={12} /> {workout.duration} min
+                </span>
+                <span className="flex items-center gap-1">
+                  <MdLocalFireDepartment size={13} /> {workout.caloriesBurned} kcal
+                </span>
+                <span className="flex items-center gap-1">
+                  <FiStar size={12} className="fill-yellow-400 text-yellow-400" /> {workout.rating}
+                </span>
+              </div>
+
               <div className="flex items-center gap-2 sm:ml-auto">
                 <Link
                   href={`/workouts/${workout.id}`}
@@ -214,7 +233,10 @@ export default function MyPlanPage() {
                 </Link>
 
                 <button
-                  onClick={() => removeFromSaved(workout.id)}
+                  onClick={() => {
+                    removeFromSaved(workout.id);
+                    toast.info(`Removed "${workout.name}" from saved`);
+                  }}
                   className="text-base-content/40 hover:text-base-content"
                   aria-label="Remove"
                 >
