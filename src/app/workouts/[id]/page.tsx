@@ -3,8 +3,6 @@ import WorkoutDetails from "@/components/workout/WorkoutDetails";
 import { IFitlog } from "@/Types/types";
 
 const getWorkout = async (id: string): Promise<IFitlog | null> => {
-  // Fetches the full list and filters client-side because the backend's
-  // /api/fitlog/:id endpoint currently returns "Not found" for valid ids.
   const response = await fetch("https://api.abcz.workers.dev/api/fitlog", {
     cache: "no-store",
   });

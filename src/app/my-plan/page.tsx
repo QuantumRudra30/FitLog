@@ -35,11 +35,18 @@ export default function MyPlanPage() {
   const [sortKey, setSortKey] = useState<SortKey>("duration");
 
   const totals = useMemo(() => {
-    const exercises = planItems.length;
-    const minutes = planItems.reduce((sum, i) => sum + i.workout.duration, 0);
-    const calories = planItems.reduce((sum, i) => sum + i.workout.caloriesBurned, 0);
+    if (tab === "today") {
+      const exercises = planItems.length;
+      const minutes = planItems.reduce((sum, i) => sum + i.workout.duration, 0);
+      const calories = planItems.reduce((sum, i) => sum + i.workout.caloriesBurned, 0);
+      return { exercises, minutes, calories };
+    }
+
+    const exercises = savedItems.length;
+    const minutes = savedItems.reduce((sum, w) => sum + w.duration, 0);
+    const calories = savedItems.reduce((sum, w) => sum + w.caloriesBurned, 0);
     return { exercises, minutes, calories };
-  }, [planItems]);
+  }, [tab, planItems, savedItems]);
 
   const sortedPlanItems = useMemo(() => {
     return [...planItems].sort((a, b) => sortFn<IFitlog>(sortKey)(a.workout, b.workout));
